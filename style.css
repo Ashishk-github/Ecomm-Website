@@ -4,14 +4,18 @@
 
 body{
     background-color: white;
+    margin: 0;
 }
 body nav{
+    position: fixed;
     top: 0px;
     text-align: center;
     background-color: black;
+    width: 1500px;
 }
 body nav ul{
     top: 0;
+    display: block;
 }
 body nav ul li {
     top: 0;
@@ -19,7 +23,7 @@ body nav ul li {
     display: inline-block;
     font-size: 20px;
     width: 150px;
-    height: 50px;
+    height: 30px;
 }
 body h1{
     background-color: grey;
@@ -28,8 +32,8 @@ body h1{
     text-align: center;
     color: white;
     position: inherit;
-    top: 0;
-    padding: 0;
+    margin-top: 60px;
+    padding: 0.5rem;
 }
 .music{
     clear: both;
@@ -49,27 +53,164 @@ body h1{
     display: block;
     padding: 2rem;
     border: none;
-    width: 450px;    
+    width: 450px; 
+    margin-left: auto;
+    margin-right: auto;   
+}
+.product h2{
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif ;
 }
 .product img{
-    align-self: center;
-    justify-content: center;
-    align-content: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto; 
 }
 .product p{
-    bottom: 8px;
-    left: 8px;
     position: relative;
+    font-size: 20px;
+    left: 20px;
+    width: 100px;
+    bottom: -20px;
 }
 .product button{
     text-align: right;
     cursor: pointer;
-    padding: 1rem;
+    padding: 0.5rem;
+    position: relative;
+    right: 0px;
+    left: 270px;
+    bottom: 35px;
+    border: none;
+    background-color: rgb(140, 187, 196);
+    color: white;
+    font-weight: 400;
+    font-size: 20px;
+    
     
 }
 .cart{
-    align-content:center;
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cart-toggle{
+    position: relative;
+}
+.cart-toggle button{
+    width: 60px;
+    background-color: aqua;
+    font-size: 20px;
+    position: absolute;
+    right:-90px ;
+}
+.cart button{
+    width: 200px;
     font-size: 25px;
-    width: 400px;
-    padding: 1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+.cartPop{
+
+    display: none;
+    border: 1px solid rebeccapurple;
+    background-color: white;
+    position: fixed;
+    width: 40%;
+    max-width: 50%;
+    top: 60px;
+    right: 0px;
+    margin-left: 550px;
+    height: 700px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 900;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.cartTable{
+    top: 0;
+    display: flex;
+    background-color: white;
+    position: relative;
+    width: 100%;
+}
+.cart-item{
+    width: 45%;
+    display: flex;
+    border-bottom: 1px solid black;
+    align-items: center;
+    margin-right: 1.5em;
+    padding-bottom: 10px;
+    margin-top: 10px;
+}
+.cart-item img{
+    width: 80px;
+    height: 80px;
+    border-radius: 20%;
+    margin-right: 20px;
+}
+.cart-price{
+    display: flex;
+    width: 20%;
+    border-bottom: 1px solid black;
+    align-items: center;
+    margin-right: 1.5em;
+    padding-bottom: 10px;
+    margin-top: 10px;
+}
+.cart-qty{
+    display: flex;
+    width: 35%;
+    align-items: center;
+    border-bottom: 1px solid black;
+    margin-right: 1.5em;
+    padding-bottom: 10px;
+    margin-top: 10px;
+}
+.cart-qty input{
+    width:40px;
+    height:30px;
+    border:1px solid rgb(47, 104, 131) ;
+    border-radius:8%;
+    outline:none;
+    text-align:center;
+    margin-right:20px;
+}
+.cart-qty button{
+    height:30px;
+    background-color: rgb(104, 31, 31) ;
+    cursor: pointer;
+    color: white;
+    border-radius:8%;
+    outline:none;
+    text-align:center;
+    font-weight: bold;
+    font-size: 20px;
+}
+.closecart{
+    border: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 0.5rem;
+    border-radius: 25%;
+    cursor: pointer;
+}
+
+.purchase{
+    margin-top: auto;
+    display: relative;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 25%;
+    background-color: rgb(26, 41, 58);
+    color: white;
+    font-size: 20px;
+    border: none;
+    margin-top: 40px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 300;
+}
+.cartPop.active{
+    display: block;
 }

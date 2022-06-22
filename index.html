@@ -6,56 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop</title>
     <link rel="stylesheet" href="style.css"/>
+    <script src="main.js" defer></script>
 </head>
 <body>
+    
+    <h1>The Generics</h1>
+    <div class="music" onclick="addtocart()">
+        <h1>Music</h1>
+        <div class="product" id="music1">
+            <h2>Music1</h2>
+            <img src="https://prasadyash2411.github.io/ecom-website/img/Album%201.png">
+            <p>$20</p>
+            <button >Add to Cart</button>
+        </div>
+        <div class="product" id="music2">
+            <h2>Music2</h2>
+            <img src="https://prasadyash2411.github.io/ecom-website/img/Album%202.png">
+            <p>$20</p>
+            <button >Add to Cart</button>
+        </div>
+        <div class="product" id="music3">
+            <h2>Music3</h2>
+            <img src="https://prasadyash2411.github.io/ecom-website/img/Album%203.png">
+            <p>$20</p>
+            <button >Add to Cart</button>
+        </div>
+        <div class="product" id="music4">
+            <h2>Music4</h2>
+            <img src="https://prasadyash2411.github.io/ecom-website/img/Album%204.png">
+            <p>$20</p>
+            <button >Add to Cart</button>
+        </div>
+        <h1>Merchandise</h1>
+        <div class="product" id="merch1">
+            <h2>Shirt</h2>
+            <img src="https://prasadyash2411.github.io/ecom-website/img/Shirt.png">
+            <p>$20</p>
+            <button >Add to Cart</button>
+        </div>
+        <div class="product" id="merch2">
+            <h2>Cup</h2>
+            <img src="https://prasadyash2411.github.io/ecom-website/img/Cofee.png">
+            <p>$20</p>
+            <button >Add to Cart</button>
+        </div>
+    </div>
+    <div class="cart">
+        <button  onclick="cartOpen()">See Cart</button>
+    </div>
+    <div class="media">
+        <h1>Generics</h1>
+    </div>
+    <div class="cartPop" id="cartPop">
+        <h2>CART</h2>
+        <button class="closecart" onclick="cartClose()">X</button>
+        <div id="cart-container"><nav class="cartTable" id="cartTable">
+                <span class="cart-item">Item</span>
+                <span class="cart-price">Price</span>
+                <span class="cart-qty">Quantity</span>
+        </nav></div>
+        <button class="purchase" onclick="purchase()">Purchase</button>
+    </div>
     <nav>
         <ul>
         <li><a>Home</a></li>
         <li><a>Product</a></li>
         <li><a>About</a></li> 
+        <li class="cart-toggle"><button onclick="cartOpen()" >Cart</li>
         </ul>
     </nav>
-    <h1>The Generics</h1>
-    <div class="music">
-        <h1>Music</h1>
-        <div class="product">
-            <img src="https://prasadyash2411.github.io/ecom-website/img/Album%201.png">
-            <p>$20</p>
-            <button>Add to Cart</button>
-        </div>
-        <div class="product">
-            <img src="https://prasadyash2411.github.io/ecom-website/img/Album%202.png">
-            <p>$20</p>
-            <button>Add to Cart</button>
-        </div>
-        <div class="product">
-            <img src="https://prasadyash2411.github.io/ecom-website/img/Album%203.png">
-            <p>$20</p>
-            <button>Add to Cart</button>
-        </div>
-        <div class="product">
-            <img src="https://prasadyash2411.github.io/ecom-website/img/Album%204.png">
-            <p>$20</p>
-            <button>Add to Cart</button>
-        </div>
-    </div>
-    <div class="music">
-        <h1>Merchandise</h1>
-        <div class="product">
-            <img src="https://prasadyash2411.github.io/ecom-website/img/Shirt.png">
-            <p>$20</p>
-            <button>Add to Cart</button>
-        </div>
-        <div class="product">
-            <img src="https://prasadyash2411.github.io/ecom-website/img/Cofee.png">
-            <p>$20</p>
-            <button>Add to Cart</button>
-        </div>
-    </div>
-    <button class="cart">See Cart</button>
-    <div class="media">
-        <h1>Generics</h1>
-    </div>
-
 </body>
 </html>
