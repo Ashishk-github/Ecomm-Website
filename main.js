@@ -1,6 +1,8 @@
 const cartPop=document.getElementById('cartPop');
 const table=document.getElementById('cart-container');
 const cart=document.getElementById('cart-container');
+const container=document.getElementById('container');
+const total=document.getElementById('total');
 var cartObj=[];
 var cartItems=[];
 function addtocart(){
@@ -10,6 +12,7 @@ function addtocart(){
     const name=document.querySelector(`#${id} h2`).innerText;
     const img=document.querySelector(`#${id} img`).src;
     const price=document.querySelector(`#${id} p`).innerText;
+    let cartTotal=0;
     obj={
         name,img,price
     };
@@ -25,8 +28,10 @@ function addtocart(){
     cart.innerHTML='<div id="cart-container"><nav class="cartTable" id="cartTable"><span class="cart-item">Item</span><span class="cart-price">Price</span><span class="cart-qty">Quantity</span></nav></div>';
     for(x of cartObj){
         showCartItems(x)
+        cartTotal+=parseInt(x.price);
     }
-    
+    createNotif(name)
+    total.innerText=`Total: $ ${cartTotal}`;
     
 }
 function showCartItems(obj){
@@ -45,12 +50,25 @@ function purchase(){
     alert('ThankYou for ordering');
     cartObj=[];
     cart.innerHTML='<div id="cart-container"><nav class="cartTable" id="cartTable"><span class="cart-item">Item</span><span class="cart-price">Price</span><span class="cart-qty">Quantity</span></nav></div>'
+    total.innerText=`Total: $ 0`
 }
 function remove(obj){
-    cartObj.filter(item=>item.name!==obj.name);
+    cartObj=cartObj.filter(item=>{return item.name!=obj.name});
     console.log(cartObj);
+    let cartTotal=0;
     cart.innerHTML='<div id="cart-container"><nav class="cartTable" id="cartTable"><span class="cart-item">Item</span><span class="cart-price">Price</span><span class="cart-qty">Quantity</span></nav></div>';
     for(x of cartObj){
         showCartItems(x);
+        cartTotal+=parseInt(x.price);
     }
+    total.innerText=`Total: $ ${cartTotal}`;
 }
+function createNotif(name){
+    const notif=document.createElement('div');
+    notif.classList.add('toast');
+    notif.innerText=`${name} added successfully`;
+    container.appendChild(notif);
+    setTimeout(()=>{
+        notif.remove();
+    },3000)
+} 

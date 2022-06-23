@@ -16,38 +16,38 @@
         <div class="product" id="music1">
             <h2>Music1</h2>
             <img src="https://prasadyash2411.github.io/ecom-website/img/Album%201.png">
-            <p>$20</p>
+            <span>$</span><p>20</p>
             <button >Add to Cart</button>
         </div>
         <div class="product" id="music2">
             <h2>Music2</h2>
             <img src="https://prasadyash2411.github.io/ecom-website/img/Album%202.png">
-            <p>$20</p>
+            <span>$</span><p>20</p>
             <button >Add to Cart</button>
         </div>
         <div class="product" id="music3">
             <h2>Music3</h2>
             <img src="https://prasadyash2411.github.io/ecom-website/img/Album%203.png">
-            <p>$20</p>
+            <span>$</span><p>20</p>
             <button >Add to Cart</button>
         </div>
         <div class="product" id="music4">
             <h2>Music4</h2>
             <img src="https://prasadyash2411.github.io/ecom-website/img/Album%204.png">
-            <p>$20</p>
+            <span>$</span><p>20</p>
             <button >Add to Cart</button>
         </div>
         <h1>Merchandise</h1>
         <div class="product" id="merch1">
             <h2>Shirt</h2>
             <img src="https://prasadyash2411.github.io/ecom-website/img/Shirt.png">
-            <p>$20</p>
+            <span>$</span><p>20</p>
             <button >Add to Cart</button>
         </div>
         <div class="product" id="merch2">
             <h2>Cup</h2>
             <img src="https://prasadyash2411.github.io/ecom-website/img/Cofee.png">
-            <p>$20</p>
+            <span>$</span><p>20</p>
             <button >Add to Cart</button>
         </div>
     </div>
@@ -65,15 +65,18 @@
                 <span class="cart-price">Price</span>
                 <span class="cart-qty">Quantity</span>
         </nav></div>
+        <h2 id="total">Total:</h2>
         <button class="purchase" onclick="purchase()">Purchase</button>
     </div>
     <nav>
         <ul>
-        <li><a>Home</a></li>
-        <li><a>Product</a></li>
-        <li><a>About</a></li> 
-        <li class="cart-toggle"><button onclick="cartOpen()" >Cart</li>
-        </ul>
+            <span><a href="./home.html">Home</a></span>
+            <span><a href="./index.html">Product</a></span>
+            <span><a href="./about.html">About</a></span> 
+        </ul>  
+        <span class="cart-toggle"><button onclick="cartOpen()" >Cart</span>
+        
     </nav>
+    <div id="container"></div>
 </body>
 </html>

@@ -5,6 +5,7 @@
 body{
     background-color: white;
     margin: 0;
+    position: relative;
 }
 body nav{
     position: fixed;
@@ -12,16 +13,19 @@ body nav{
     text-align: center;
     background-color: black;
     width: 1500px;
+    
 }
 body nav ul{
     top: 0;
     display: block;
 }
-body nav ul li {
+body nav ul span {
     top: 0;
     color: white;
     display: inline-block;
     font-size: 20px;
+    color: white;
+    font-weight: 500;
     width: 150px;
     height: 30px;
 }
@@ -66,10 +70,17 @@ body h1{
     margin-left: auto;
     margin-right: auto; 
 }
-.product p{
+.product span{
     position: relative;
     font-size: 20px;
     left: 20px;
+    width: 100px;
+    bottom: -63px;
+}
+.product p{
+    position: relative;
+    font-size: 20px;
+    left: 35px;
     width: 100px;
     bottom: -20px;
 }
@@ -102,7 +113,8 @@ body h1{
     background-color: aqua;
     font-size: 20px;
     position: absolute;
-    right:-90px ;
+    top: -30px;
+    right:-350px ;
 }
 .cart button{
     width: 200px;
@@ -213,4 +225,70 @@ body h1{
 }
 .cartPop.active{
     display: block;
+}
+#container{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+.toast{
+    background-color: rgb(50, 161, 205);
+    text-align: center;
+    width: 300px;
+    border: none;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 2rem;
+    border-radius: 15%;
+}
+body .tour{
+    position: absolute;
+    top: 90px;
+    width: 100%;
+    text-align: center;
+
+}
+.tour-item{
+    
+    border-bottom: 1px solid black ;
+    width: 80%;
+    display: flex;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+.tour-date{
+    display: flex;
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 300;
+    margin-left: 1rem;
+}
+.tour-place{
+    display: flex;
+    width: 45%;
+}
+.tour-spec-place{
+    display: flex;
+    width: 20%;
+}
+.tour-item button{
+    display: flex;
+    background-color: blue;
+    color: white;
+    font-weight: 900;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    cursor: pointer;
+    border: none;
+    border-radius: 10%;
+    width: 10%;
+    height: 2rem;
+    text-align: center;
+    justify-content: center;
+    margin-right: 2rem;
 }
