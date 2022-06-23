@@ -1,4 +1,3 @@
-//Add Product
 let products=[];
 window.addEventListener('DOMContentLoaded',()=>{
     axios.get('http://localhost:3000/admin/products')
@@ -6,11 +5,7 @@ window.addEventListener('DOMContentLoaded',()=>{
         products=res.data;
         showProducts(products);
         axios.get('http://localhost:3000/cart')
-        .then(res1=>{
-            for(x of res1.data){
-                showCartItems(x)
-            }
-        });
+        .then(res1=>{showCartItems(res1.data)});
     })
 })
 const cartPop=document.getElementById('cartPop');
@@ -21,7 +16,6 @@ const total=document.getElementById('total');
 var cartObj=[];
 var cartItems=[];
 function addtocart(){
-    cart.innerHTML='<div id="cart-container"><nav class="cartTable" id="cartTable"><span class="cart-item">Item</span><span class="cart-price">Price</span><span class="cart-qty">Quantity</span></nav></div>';
     const id=(event.target.parentNode.id);
     console.log(id)
     const params = new URLSearchParams();
@@ -30,11 +24,10 @@ function addtocart(){
     .then((res)=>{
         createNotif(name)
         axios.get('http://localhost:3000/cart')
-        .then(res1=>{
-            for(x of res1.data){
-                showCartItems(x)
-            }
-        });
+        .then(res1=>{showCartItems(res1.data)});
+    })
+    .then((res)=>{
+        total.innerText=`Total:$`
     })
         .catch((err)=>crossOriginIsolated.log(err));
     // console.log(event.path[1].children[0],event.path[1].children[1],event.path[1].children[2].value);
@@ -59,14 +52,22 @@ function addtocart(){
     
     
 }
-function showCartItems(obj){
-    console.log(obj.productData);
-    const nav=document.createElement('nav');
-    nav.innerHTML=`<span class="cart-item"><img src="${obj.productData.imageUrl}" >${obj.productData.title}</span>
-    <span class="cart-price">${obj.productData.price}</span><span class="cart-qty">
-    <input type="number" value="${obj.qty}"><button onclick="remove()" >remove</button></span>`;
-    nav.className='cartTable';
-    table.appendChild(nav);
+function showCartItems(objs){
+    let cartTot=0;
+    cart.innerHTML=`<div id="cart-container"><nav class="cartTable" id="cartTable">
+    <span class="cart-item">Item</span><span class="cart-price">Price</span>
+    <span class="cart-qty">Quantity</span></nav></div>`;
+    for(obj of objs){
+        const nav=document.createElement('nav');
+        nav.id=obj.productData.id;
+        nav.innerHTML=`<span class="cart-item"><img src="${obj.productData.imageUrl}" >${obj.productData.title}</span>
+        <span class="cart-price">${obj.productData.price}</span><span class="cart-qty">
+        <input type="number" value="${obj.qty}"><button onclick="remove()" >remove</button></span>`;
+        nav.className='cartTable';
+        table.appendChild(nav);
+        cartTot+=obj.productData.price*obj.qty
+    }
+    total.innerText=`Total: $ ${cartTot}`
 }
 function cartOpen(){
     cartPop.classList.add('active');
@@ -81,17 +82,15 @@ function purchase(){
     total.innerText=`Total: $ 0`
 }
 function remove(){
-    console.log(event.target.parentNode.parentNode.firstChild.innerText);
-    const obj=event.target.parentNode.parentNode.firstChild.innerText.toString();
-    cartObj=cartObj.filter(item=>{return item.name!=obj});
-    console.log(cartObj,obj);
-    let cartTotal=0;
-    cart.innerHTML='<div id="cart-container"><nav class="cartTable" id="cartTable"><span class="cart-item">Item</span><span class="cart-price">Price</span><span class="cart-qty">Quantity</span></nav></div>';
-    for(x of cartObj){
-        showCartItems(x);
-        cartTotal+=parseInt(x.price);
-    }
-    total.innerText=`Total: $ ${cartTotal}`;
+    console.log(event.target.parentNode.parentNode.id);
+    const id=event.target.parentNode.parentNode.id
+    // cartObj=cartObj.filter(item=>{return item.name!=obj});
+    // console.log(cartObj,obj);
+    // let cartTotal=0;
+    const url="http://localhost:3000/cart-delete-item/"+id;
+    axios.delete(url)
+    .then(res=>axios.get('http://localhost:3000/cart'))
+    .then(res1=>{showCartItems(res1.data)});
 }
 function createNotif(name){
     const notif=document.createElement('div');
