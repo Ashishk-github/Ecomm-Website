@@ -55,6 +55,13 @@
     <div class="cart">
         <button  onclick="cartOpen()">See Cart</button>
     </div>
+    <div class="page-bar" id="page-bar" onclick="pageNavigbtn()">
+        <span id="firstbtn"><button >first</button></span>
+        <span id="prevbtn"><button>prev</button></span>
+        <span id="curr"></span>
+        <span id="nextbtn"><button>next</button></span>
+        <span id="lastbtn"><button >last</button></span>
+    </div>
     <div class="media">
         <h1>Generics</h1>
     </div>
@@ -66,6 +73,13 @@
                 <span class="cart-price">Price</span>
                 <span class="cart-qty">Quantity</span>
         </nav></div>
+        <div class="page-bar" id="page-bar" onclick="cartNavigbtn()">
+            <span id="cfirstbtn"><button >first</button></span>
+            <span id="cprevbtn"><button>prev</button></span>
+            <span id="c-curr"></span>
+            <span id="cnextbtn"><button>next</button></span>
+            <span id="clastbtn"><button >last</button></span>
+        </div>
         <h2 id="total">Total:</h2>
         <button class="purchase" onclick="purchase()">Purchase</button>
     </div>

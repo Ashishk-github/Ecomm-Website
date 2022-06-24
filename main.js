@@ -1,30 +1,97 @@
-let products=[];
+let pageId=1;
+let pageCount=1;
+let cartPageId=1;
+let cartPageCount=1;
+let cartItems=[]
 window.addEventListener('DOMContentLoaded',()=>{
-    axios.get('http://localhost:3000/admin/products')
-    .then((res)=>{
-        products=res.data;
-        showProducts(products);
-        axios.get('http://localhost:3000/cart')
-        .then(res1=>{showCartItems(res1.data)});
-    })
+    pageNavig();
+    axios.get('http://localhost:3000/cart')
+    .then(res1=>{
+            showCartItems(res1.data)});
 })
+
 const cartPop=document.getElementById('cartPop');
 const table=document.getElementById('cart-container');
 const cart=document.getElementById('cart-container');
 const container=document.getElementById('container');
 const total=document.getElementById('total');
-var cartObj=[];
-var cartItems=[];
+const pagebtn=document.getElementById('page-bar');
+//Page Navigation Functions for Products
+function pageNavigbtn(){
+    const pagebarid=event.target.parentNode.id;
+    switch(pagebarid){
+        case "firstbtn":
+            pageId=1
+            pageNavig()
+            break;
+        case "prevbtn":
+            if(pageId>1) pageId-=1
+            pageNavig()
+            break;
+        case "nextbtn":
+            if(pageId<pageCount) pageId+=1
+            pageNavig()
+            break;
+        case "lastbtn":
+            pageId=pageCount
+            pageNavig()
+            break;
+        default:
+            break;
+
+    }
+}
+
+async function pageNavig(){
+    const count=await axios.get('http://localhost:3000/productcount');
+    pageCount=Math.round(parseInt(count.data)/2);
+    console.log(pageCount);
+    const url='http://localhost:3000/products/'+pageId.toString();
+    const products=await axios.get(url);
+    showProducts(products);
+    console.log(4)
+}
+//Page Navigation Functions for Cart
+function cartNavigbtn(){
+    const pagebarid=event.target.parentNode.id;
+    switch(pagebarid){
+        case "cfirstbtn":
+            cartPageId=1
+            showCartItems(cartItems)
+            break;
+        case "cprevbtn":
+            if(cartPageId>1) cartPageId-=1
+            showCartItems(cartItems)
+            break;
+        case "cnextbtn":
+            if(cartPageId<cartPageCount) cartPageId+=1
+            showCartItems(cartItems)
+            break;
+        case "clastbtn":
+            cartPageId=cartPageCount
+            showCartItems(cartItems)
+            break;
+        default:
+            break;
+
+    }
+}
+
+//Adding to Cart
 function addtocart(){
     const id=(event.target.parentNode.id);
-    console.log(id)
+    
     const params = new URLSearchParams();
     params.append('id', id);
+    console.log(id);
     axios.post('http://localhost:3000/cart', params)
     .then((res)=>{
-        createNotif(name)
+        createNotif(name);
+        console.log(res)
         axios.get('http://localhost:3000/cart')
-        .then(res1=>{showCartItems(res1.data)});
+        .then(res1=>{
+            
+            showCartItems(res1.data)});
     })
     .then((res)=>{
         total.innerText=`Total:$`
@@ -52,21 +119,28 @@ function addtocart(){
     
     
 }
-function showCartItems(objs){
+//Show Cart Item Functions
+function showCartItems(obj){
+    cartItems=obj;
+    const curr=document.getElementById('c-curr');
+    cartPageCount=Math.round((obj.length)/2);
+    const j=(cartPageId-1)*2;
     let cartTot=0;
+    console.log(cartPageCount);
     cart.innerHTML=`<div id="cart-container"><nav class="cartTable" id="cartTable">
     <span class="cart-item">Item</span><span class="cart-price">Price</span>
     <span class="cart-qty">Quantity</span></nav></div>`;
-    for(obj of objs){
+    for(let i=j;i<j+2 && i<obj.length;i++){
         const nav=document.createElement('nav');
-        nav.id=obj.productData.id;
-        nav.innerHTML=`<span class="cart-item"><img src="${obj.productData.imageUrl}" >${obj.productData.title}</span>
-        <span class="cart-price">${obj.productData.price}</span><span class="cart-qty">
-        <input type="number" value="${obj.qty}"><button onclick="remove()" >remove</button></span>`;
+        nav.id=obj[i].id;
+        nav.innerHTML=`<span class="cart-item"><img src="${obj[i].imageUrl}" >${obj[i].title}</span>
+        <span class="cart-price">${obj[i].price}</span><span class="cart-qty">
+        <input type="number" value="${obj[i].cartItem.quantity}"><button onclick="remove()" >remove</button></span>`;
         nav.className='cartTable';
         table.appendChild(nav);
-        cartTot+=obj.productData.price*obj.qty
+        cartTot+=obj[i].price*obj[i].cartItem.quantity
     }
+    curr.innerText=`${cartPageId}`;
     total.innerText=`Total: $ ${cartTot}`
 }
 function cartOpen(){
@@ -81,16 +155,13 @@ function purchase(){
     cart.innerHTML='<div id="cart-container"><nav class="cartTable" id="cartTable"><span class="cart-item">Item</span><span class="cart-price">Price</span><span class="cart-qty">Quantity</span></nav></div>'
     total.innerText=`Total: $ 0`
 }
-function remove(){
+async function remove(){
     console.log(event.target.parentNode.parentNode.id);
     const id=event.target.parentNode.parentNode.id
-    // cartObj=cartObj.filter(item=>{return item.name!=obj});
-    // console.log(cartObj,obj);
-    // let cartTotal=0;
     const url="http://localhost:3000/cart-delete-item/"+id;
-    axios.delete(url)
-    .then(res=>axios.get('http://localhost:3000/cart'))
-    .then(res1=>{showCartItems(res1.data)});
+    const res=await axios.delete(url);
+    const res1=await axios.get('http://localhost:3000/cart');
+    showCartItems(res1.data);
 }
 function createNotif(name){
     const notif=document.createElement('div');
@@ -101,10 +172,16 @@ function createNotif(name){
         notif.remove();
     },3000)
 } 
+//Shows Products on Screen
 function showProducts(products){
-    for(x of products){
+    const curr=document.getElementById('curr');
+    curr.innerText=`${pageId}`;
+    console.log(pageId,pageCount);
+    console.log(products)
+    const div=document.getElementById('products');
+    div.innerHTML=``;
+    for(x of products.data){
         const product=document.createElement('div');
-        const div=document.getElementById('products');
         product.className='product';
         product.id=x.id;
         product.innerHTML=`<h2>${x.title}</h2>
