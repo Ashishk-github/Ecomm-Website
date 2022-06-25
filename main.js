@@ -97,28 +97,8 @@ function addtocart(){
         total.innerText=`Total:$`
     })
         .catch((err)=>crossOriginIsolated.log(err));
-    // console.log(event.path[1].children[0],event.path[1].children[1],event.path[1].children[2].value);
-    // console.log(event.path[1].children[1])
-    // const name=document.querySelector(`#${id} h2`).innerText;
-    // const img=document.querySelector(`#${id} img`).src;
-    // const price=document.querySelector(`#${id} p`).innerText;
-    // let cartTotal=0;
-    // obj={
-    //     name,img,price
-    // };
-    // for(x of cartObj){
-    //     if(x.name===name){
-    //         alert('Please increase the quantity in cart');
-    //         return;
-    //     }
-    // }
-    // cartObj.push(obj);
-    // cartItems.push(obj)
-    // console.log(cartObj,cartItems);
-    
-    
-    
 }
+
 //Show Cart Item Functions
 function showCartItems(obj){
     cartItems=obj;
@@ -155,8 +135,6 @@ async function purchase(){
     createNotif('ThankYou for ordering,Order');
     const res=await axios.get('http://localhost:3000/cart');
     showCartItems(res.data);
-    
-    
 }
 async function remove(){
     console.log(event.target.parentNode.parentNode.id);

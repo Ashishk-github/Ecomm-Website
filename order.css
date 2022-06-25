@@ -1,0 +1,23 @@
+#orders{
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+}
+.orderDet{
+    position: relative;
+    display: block;
+    width: 20%;
+    margin-left: 40%;
+    margin-right: 40%;
+    padding: 1rem;
+    border-bottom:5px solid rgb(146, 82, 82) ;
+}
+.orderItemDet{
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 20%;
+    padding: 0.5 rem;
+    margin-bottom: 1rem;
+
+}
