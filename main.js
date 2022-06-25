@@ -149,11 +149,14 @@ function cartOpen(){
 function cartClose(){
     cartPop.classList.remove('active');
 }
-function purchase(){
-    alert('ThankYou for ordering');
-    cartObj=[];
-    cart.innerHTML='<div id="cart-container"><nav class="cartTable" id="cartTable"><span class="cart-item">Item</span><span class="cart-price">Price</span><span class="cart-qty">Quantity</span></nav></div>'
-    total.innerText=`Total: $ 0`
+async function purchase(){
+    const order=await axios.post('http://localhost:3000/create-order');
+    console.log(order);
+    createNotif('ThankYou for ordering,Order');
+    const res=await axios.get('http://localhost:3000/cart');
+    showCartItems(res.data);
+    
+    
 }
 async function remove(){
     console.log(event.target.parentNode.parentNode.id);
